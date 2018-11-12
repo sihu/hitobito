@@ -8,13 +8,17 @@
     %h2
       = title
     %span.primary-group
-      - if entry.groups.uniq.length > 1 && can?(:primary_group, entry)
-        %select#primary-group-select
-          - entry.groups.uniq.each do |group|
-            %option{value: group.id, 
-                    selected: (group.id == entry.primary_group_id), 
-                    data: {url: primary_group_group_person_path(@group, entry, primary_group_id: group.id)}}
-              = GroupDecorator.decorate(group).name_with_layer
+    -# TODO:
+    -# Form für primary group select
+    -# JS response für edit -> display form in popover
+    -# Response für update -> view aktualisieren
+      -# - if entry.groups.uniq.length > 1 && can?(:primary_group, entry)
+      -#   %select#primary-group-select
+      -#     - entry.groups.uniq.each do |group|
+      -#       %option{value: group.id, 
+      -#               selected: (group.id == entry.primary_group_id), 
+      -#               data: {url: primary_group_group_person_path(@group, entry, primary_group_id: group.id)}}
+      -#         = GroupDecorator.decorate(group).name_with_layer
     - grouped_roles.each do |layer, roles|
       %div{style: "border-top: 1px solid #eee; margin-bottom: 1rem; padding-top: 0.5rem;"}
         - if can?(:new, layer.roles.new)
@@ -23,7 +27,11 @@
                                 return_url: group_person_path(layer.id, entry.id)),
                                 :plus,
                                 class: 'btn-small')
-        %strong= link_to(layer, layer)
+
+        %strong
+          - if layer.id == entry.primary_group_id
+            = icon('star')
+          = link_to(layer, layer)
         - entry.roles_grouped(roles).each do |group, roles|
           %div{style: "padding"}
             - if group.layer?
@@ -38,6 +46,8 @@
                 - roles.each_with_index do |role, index|
                   %div
                     .chip
+                      - if group.id == entry.primary_group_id
+                        %a= icon('star')
                       = link_to(group)
                       = role
                       = link_action_edit(edit_group_role_path(role.group, role)) if can?(:edit, role)
