@@ -9,13 +9,12 @@ app.PersonPrimaryGroup = {
   setPrimaryGroup: (e) ->
     selected = $('#primary-group-select option:selected')
     url = selected.attr('data-url')
-    $.ajax({ url: url, method: "PUT", dataType: "json"})
+    $.ajax({ url: url, method: "PUT", dataType: "script"})
   toggleEditMode: (e) ->
     $('.edit-primary-group-form').toggle();
     $('#edit-primary-group').toggle();
   updateRolesAside: (rolesAside) ->
-    console.log("I am in the right place")
-    $('.section.roles').replaceWith(rolesAside)
+    $('section.roles').replaceWith(rolesAside)
 }
 
 $(document).on('change', '#primary-group-select', app.PersonPrimaryGroup.setPrimaryGroup)
