@@ -12,13 +12,6 @@
     -# Form für primary group select
     -# JS response für edit -> display form in popover
     -# Response für update -> view aktualisieren
-      -# - if entry.groups.uniq.length > 1 && can?(:primary_group, entry)
-      -#   %select#primary-group-select
-      -#     - entry.groups.uniq.each do |group|
-      -#       %option{value: group.id, 
-      -#               selected: (group.id == entry.primary_group_id), 
-      -#               data: {url: primary_group_group_person_path(@group, entry, primary_group_id: group.id)}}
-      -#         = GroupDecorator.decorate(group).name_with_layer
     - grouped_roles.each do |layer, roles|
       %div{style: "border-top: 1px solid #eee; margin-bottom: 1rem; padding-top: 0.5rem;"}
         - if can?(:new, layer.roles.new)
@@ -30,7 +23,8 @@
 
         %strong
           - if layer.id == entry.primary_group_id
-            = icon('star')
+            %a{data: {toggle: 'tooltip'}, title: 'Primärgruppe'}
+              = icon('star')
           = link_to(layer, layer)
         - entry.roles_grouped(roles).each do |group, roles|
           %div{style: "padding"}
@@ -46,9 +40,23 @@
                 - roles.each_with_index do |role, index|
                   %div
                     .chip
+                      -# TODO: HINT DOES NOT WORK, FORM SOME REASON IT SAYS TRANSLATION MISSING, but I checked the path, it should be there.
+                      = link_to(group, group)
                       - if group.id == entry.primary_group_id
-                        %a= icon('star')
-                      = link_to(group)
+                        %a(href='#edit-primary-group')= icon('star')
                       = role
                       = link_action_edit(edit_group_role_path(role.group, role)) if can?(:edit, role)
                       = link_action_destroy(group_role_path(role.group, role)) if can?(:destroy, role)
+    %p
+      %small= icon('star')
+      Primärgruppe
+      %a#edit-primary-group [ändern]
+      .edit-primary-group-form{style: "display: none"}
+        - if entry.groups.uniq.length > 1 && can?(:primary_group, entry)
+          %select#primary-group-select
+            - entry.groups.uniq.each do |group|
+              %option{value: group.id, 
+                      selected: (group.id == entry.primary_group_id), 
+                      data: {url: primary_group_group_person_path(@group, entry, primary_group_id: group.id)}}
+                = GroupDecorator.decorate(group).name_with_layer
+

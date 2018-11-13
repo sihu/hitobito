@@ -22,6 +22,7 @@ app.PersonTags = {
 
   updateTags: (tags) ->
     $('.person-tags').replaceWith(tags)
+    console.log("I am here")
     app.PersonTags.hideForm()
     $('.person-tag-add').focus();
 

@@ -1012,6 +1012,10 @@ de:
            Die Haupt-E-Mail Adresse einer Person mit mehreren Rollen kann nur
            von einem über alle diese Rollen übergeordneten Benutzer geändert werden.
 
+    roles_aside:
+      primary_group_hint: Hauptgruppe ändern
+      primary_group_explanation: Bei Exporten / Anmeldungen wird primär die Hauptgruppe für diese Person angezeigt.
+
     fields:
       format_birthday: (dd.mm.yyyy)
       no_sensitive_information: ''
