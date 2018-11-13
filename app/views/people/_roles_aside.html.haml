@@ -10,9 +10,9 @@
         - if entry.groups.uniq.length > 1
         %p.pull-right{style: "font-size: 0.6rem;"}
           %a= icon('star')
-          Primärgruppe
+          = t(".primary_group")
           - if can?(:primary_group, entry)
-            %a#edit-primary-group [ändern]
+            %a#edit-primary-group= "[#{t('global.link.edit')}]"
             .edit-primary-group-form{style: "display: none"}
               %select#primary-group-select
                 - entry.groups.uniq.each do |group|
@@ -20,7 +20,10 @@
                           selected: (group.id == entry.primary_group_id), 
                           data: {url: primary_group_group_person_path(@group, entry, primary_group_id: group.id)}}
                     = GroupDecorator.decorate(group).name_with_layer
-
+    -# TODO:
+    -# Clean up commit
+    -# Make translations work
+    -# PR
     %span.primary-group
     - grouped_roles.each do |layer, roles|
       %div{style: "border-top: 1px solid #eee; margin-bottom: 1rem; padding-top: 0.5rem;"}
