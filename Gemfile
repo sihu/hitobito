@@ -7,7 +7,7 @@
 
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.8'
+gem 'rails', '4.2.11'
 
 gem 'activerecord-session_store'
 gem 'acts-as-taggable-on', '~> 3.5.0'
@@ -77,6 +77,7 @@ gem 'turbolinks'
 gem 'uglifier'
 
 # security updates, can be deleted or changed if they get in the way of updates or so
+gem 'activejob', '>= 4.2.11'
 gem 'loofah', '~> 2.2.3'
 gem 'rack', '~> 1.6.11'
 gem 'sprockets', '~> 3.7.2'
