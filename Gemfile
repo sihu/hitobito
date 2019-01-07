@@ -135,7 +135,6 @@ group :metrics do
   gem 'rubocop'
   gem 'rubocop-checkstyle_formatter'
   gem 'ruby-prof'
-  gem 'simplecov-rcov'
 end
 
 # Include the wagon gems you want attached in Wagonfile.

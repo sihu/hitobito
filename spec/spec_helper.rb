@@ -1,20 +1,11 @@
 # encoding: utf-8
 
-#  Copyright (c) 2012-2018, Jungwacht Blauring Schweiz. This file is part of
+#  Copyright (c) 2012-2019, Jungwacht Blauring Schweiz. This file is part of
 #  hitobito and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito.
 
 DB_CLEANER_STRATEGY = :truncation
-
-if ENV['CI']
-  require 'simplecov'
-  require 'simplecov-rcov'
-  SimpleCov.start 'rails'
-  SimpleCov.coverage_dir 'spec/coverage'
-  # use this formatter for jenkins compatibility
-  SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
-end
 
 ENV['RAILS_ENV'] = 'test'
 ENV['RAILS_GROUPS'] = 'assets'
